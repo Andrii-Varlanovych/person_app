@@ -13,4 +13,6 @@ public interface PeopleDao {
     void updatePerson(int id, Person person);
 
     void deletePerson(int id);
+
+
 }

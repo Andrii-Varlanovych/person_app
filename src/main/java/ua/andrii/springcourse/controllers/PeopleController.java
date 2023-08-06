@@ -4,18 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 import ua.andrii.springcourse.model.Person;
 import ua.andrii.springcourse.service.PeopleService;
+import ua.andrii.springcourse.util.PersonValidator;
+
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
+    private PersonValidator personValidator;
     private PeopleService peopleService;
 
-    @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PersonValidator personValidator, PeopleService peopleService) {
+        this.personValidator = personValidator;
         this.peopleService = peopleService;
     }
 
@@ -41,6 +45,7 @@ public class PeopleController {
     @PostMapping()
     public String createNewPerson(@ModelAttribute("person") @Valid Person person,
                                   BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "people/newPerson_page";
         }
@@ -59,6 +64,7 @@ public class PeopleController {
     public String updatePerson(@PathVariable("id") int id,
                                @ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "people/editPerson_page";
         }

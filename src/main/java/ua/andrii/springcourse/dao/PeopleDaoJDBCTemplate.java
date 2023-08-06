@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.andrii.springcourse.model.Person;
 import ua.andrii.springcourse.util.PersonRawMapper;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +47,12 @@ public class PeopleDaoJDBCTemplate implements PeopleDao {
     @Override
     public void deletePerson(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE id = ?", id);
+    }
+
+    public Optional<Person> getPersonOptional(String email) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE email = ?",
+                        new Object[]{email},
+                        new PersonRawMapper() )
+                .stream().findAny();
     }
 }
