@@ -6,10 +6,15 @@
 </head>
 <body>
 Person:
-<p th:text="${person.getName}">PersonName</p>
-<p th:text="${person.getId}">PersonId</p>
-<p th:text="${person.getAge}">PersonAge</p>
-<p th:text="${person.getEmail}">PersonEmail</p>
+
+<br>
+Person name : <div th:text="${person.getName}">PersonName</div>
+<br>
+Person Id : <div th:text="${person.getId}">PersonId</div>
+<br>
+Person age : <div th:text="${person.getAge}">PersonAge</div>
+<br/>
+Person email : <div th:text="${person.getEmail}">PersonEmail</div>
 <br/>
 
 <hr/>
