@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditPerson_page</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+
+    <label th:for="name">Enter name : </label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</div>
+    <br/>
+
+    <label th:for="age">Enter name : </label>
+    <input type="text" th:field="*{age}" id="age">
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">AgeError</div>
+    <br/>
+
+    <label th:for="email">Enter name : </label>
+    <input type="text" th:field="*{email}" id="email">
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">EmailError</div>
+    <br/>
+
+    <input type="submit" value="Update">
+
+</form>
+</body>
+</html>
